@@ -1,0 +1,13 @@
+- hosts: bang
+  roles:
+    - { role: bang,      tags: bang      }
+  handlers:
+    - include: handlers/services.yml
+      static: yes
+
+- hosts: bangweb
+  roles:
+    - { role: bangweb,   tags: bangweb   }
+  handlers:
+    - include: handlers/services.yml
+      static: yes

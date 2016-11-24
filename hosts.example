@@ -1,0 +1,12 @@
+bangserver.example.com ansible_ssh_user=root ansible_sudo=no
+www.bang.example.com ansible_ssh_user=root ansible_sudo=no
+bangclient.example.com ansible_ssh_user=root ansible_sudo=no
+
+[bang]
+bangserver.example.com
+
+[bangweb]
+www.bang.example.com
+
+[bangclient]
+bangclient.example.com

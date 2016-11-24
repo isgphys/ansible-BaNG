@@ -1,0 +1,5 @@
+- name: clone BaNG git repository
+  git: repo={{ bang_git_repo }}
+       dest=/opt/BaNG
+       accept_hostkey=yes
+       update=no
