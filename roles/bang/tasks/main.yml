@@ -37,3 +37,10 @@
     regexp: '^(BKP_RSYNC_RSHELL:).*$'
     replace: '\1\t  "/usr/bin/ssh -i /root/.ssh/BaNG_rsa -o StrictHostKeyChecking=yes"'
     backup: no
+
+- name: modify default_servers.yaml, disable DB-Support
+  replace:
+    dest: /opt/BaNG/etc/defaults_servers.yaml
+    regexp: '^(db_support:)\s+1$'
+    replace: '\1\t\t0'
+    backup: no
