@@ -1,5 +1,39 @@
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- include: tools.yml
+- include: dependencies.yml
+
 - name: clone BaNG git repository
-  git: repo={{ bang_git_repo }}
-       dest=/opt/BaNG
-       accept_hostkey=yes
-       update=no
+  git:
+    repo: "{{ bang_git_repo }}"
+    dest: /opt/BaNG
+    accept_hostkey: yes
+    update: no
+
+- name: copy etc.example to etc
+  command: /bin/cp -r /opt/BaNG/etc.example /opt/BaNG/etc
+  args:
+    creates: /opt/BaNG/etc
+
+- name: rename server/bangserver_defaults.yaml
+  command: /bin/mv /opt/BaNG/etc/servers/bangserver_defaults.yaml /opt/BaNG/etc/servers/{{ inventory_hostname }}_defaults.yaml
+  args:
+    creates: /opt/BaNG/etc/servers/{{ inventory_hostname }}_defaults.yaml
+
+- name: rename server/bangserver_cronjobs.yaml
+  command: /bin/mv /opt/BaNG/etc/servers/bangserver_cronjobs.yaml /opt/BaNG/etc/servers/{{ inventory_hostname }}_cronjobs.yaml
+  args:
+    creates: /opt/BaNG/etc/servers/{{ inventory_hostname }}_cronjobs.yaml
+
+- name: Generate SSH keys for BaNG
+  shell: ssh-keygen -b 4096 -t rsa -f /root/.ssh/BaNG_rsa -q
+  args:
+    creates: /root/.ssh/BaNG_rsa
+
+- name: modify default_hosts.yaml to use the BaNG_rsa key
+  replace:
+    dest: /opt/BaNG/etc/defaults_hosts.yaml
+    regexp: '^(BKP_RSYNC_RSHELL:).*$'
+    replace: '\1\t  "/usr/bin/ssh -i /root/.ssh/BaNG_rsa -o StrictHostKeyChecking=yes"'
+    backup: no

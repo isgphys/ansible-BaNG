@@ -1,0 +1,21 @@
+- name: install BaNG dependencies
+  apt: pkg={{ item }}
+  with_items:
+    - rsync
+    - perl
+    - libclone-perl
+    - libdatetime-perl
+    - libdbd-mysql-perl
+    - libdbi-perl
+    - libfile-find-rule-perl
+    - libforks-perl
+    - libjson-perl
+    - liblist-moreutils-perl
+    - liblocale-gettext-perl
+    - libmail-sendmail-perl
+    - libmime-lite-perl
+    - libmodule-refresh-perl
+    - libnet-ldap-perl
+    - libtemplate-perl
+    - libyaml-tiny-perl
+    - libtext-diff-perl
