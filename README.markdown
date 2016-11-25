@@ -18,6 +18,17 @@ Adapt the following to your needs:
   * `hosts`
   * `group_vars/all.yml`
 
+Vagrant
+-------
+
+```sh
+vagrant up
+```
+
+```sh
+vagrant provision --provision-with ansible
+```
+
 Ansible
 -------
 
