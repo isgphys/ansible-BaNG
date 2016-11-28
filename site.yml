@@ -7,8 +7,8 @@
 
 - hosts: bangweb
   roles:
-    - { role: bangweb,  tags: bangweb   }
     - { role: bangdb,   tags: bangdb    }
+    - { role: bangweb,  tags: bangweb   }
   handlers:
     - include: handlers/services.yml
       static: yes

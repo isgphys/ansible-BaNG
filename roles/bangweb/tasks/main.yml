@@ -1,6 +1,15 @@
 - name: install apache2 package
   apt: pkg=apache2
 
+
+- name: set ServerName
+  shell: echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf
+  args:
+    creates: /etc/apache2/conf-available/servername.conf
+
+- name: enable servername.conf
+  command: /usr/sbin/a2enconf servername
+
 - name: install BaNG-Web dependencies
   apt: pkg={{ item }}
   with_items:
@@ -8,8 +17,42 @@
     - libdancer-perl
     - libdancer-plugin-auth-extensible-perl
 
+- name: Load required Apache2 modules
+  apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - ssl
+    - proxy
+    - proxy_http
+
+- name: Create apache2_config
+  template:
+    dest: /etc/apache2/sites-enabled/BaNG.conf
+    src: apache2_config.j2
+  notify: restart apache2
+
 - name: copy config.yml.example to config.yml
   copy:
     src: "{{ bang_path }}/config.yml.example"
     dest: "{{ bang_path }}/config.yml"
     remote_src: true
+  notify: touch production.log file
+
+- name: fix folder ownerships
+  file:
+    path: "{{ bang_path }}/{{ item }}"
+    mode: 0755
+    owner: www-data
+    state: directory
+    recurse: yes
+  with_items:
+    - "var/log"
+    - "var/sessions"
+
+- name: Copy BaNG-Web.service to /etc/systemd/system/
+  copy:
+    src: "{{ bang_path }}/system/BaNG-Web.service"
+    dest: /etc/systemd/system/
+    remote_src: true
+  notify: restart BaNG-Web service
