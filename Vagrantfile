@@ -23,6 +23,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.groups = {
       "bang" => [ "bang-dev" ],
+      "bangweb" => [ "bang-dev" ],
     }
     ansible.sudo = true
     ansible.playbook = "./site.yml"
