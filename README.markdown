@@ -1,7 +1,7 @@
 ansible-bang
 ============
 
-Ansible playbook to configure BaNG.
+Ansible playbook to configure and setup [BaNG](https://github.com/patschbo/BaNG)
 
 Groups
 ------
