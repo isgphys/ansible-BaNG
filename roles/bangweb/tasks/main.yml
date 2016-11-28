@@ -10,6 +10,6 @@
 
 - name: copy config.yml.example to config.yml
   copy:
-    src: /opt/BaNG/config.yml.example
-    dest: /opt/BaNG/config.yml
+    src: "{{ bang_path }}/config.yml.example"
+    dest: "{{ bang_path }}/config.yml"
     remote_src: true

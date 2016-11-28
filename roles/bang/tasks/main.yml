@@ -7,24 +7,24 @@
 - name: clone BaNG git repository
   git:
     repo: "{{ bang_git_repo }}"
-    dest: /opt/BaNG
+    dest: "{{ bang_path }}"
     accept_hostkey: yes
     update: no
 
 - name: copy etc.example to etc
-  command: /bin/cp -r /opt/BaNG/etc.example /opt/BaNG/etc
+  command: "/bin/cp -r {{ bang_path }}/etc.example {{ bang_config_path }}"
   args:
-    creates: /opt/BaNG/etc
+    creates: "{{ bang_config_path }}"
 
 - name: rename server/bangserver_defaults.yaml
-  command: /bin/mv /opt/BaNG/etc/servers/bangserver_defaults.yaml /opt/BaNG/etc/servers/{{ inventory_hostname }}_defaults.yaml
+  command: "/bin/mv {{ bang_config_path }}/servers/bangserver_defaults.yaml {{ bang_config_path }}/servers/{{ inventory_hostname }}_defaults.yaml"
   args:
-    creates: /opt/BaNG/etc/servers/{{ inventory_hostname }}_defaults.yaml
+    creates: "{{ bang_config_path }}/servers/{{ inventory_hostname }}_defaults.yaml"
 
 - name: rename server/bangserver_cronjobs.yaml
-  command: /bin/mv /opt/BaNG/etc/servers/bangserver_cronjobs.yaml /opt/BaNG/etc/servers/{{ inventory_hostname }}_cronjobs.yaml
+  command: "/bin/mv {{ bang_config_path }}/servers/bangserver_cronjobs.yaml {{ bang_config_path }}/servers/{{ inventory_hostname }}_cronjobs.yaml"
   args:
-    creates: /opt/BaNG/etc/servers/{{ inventory_hostname }}_cronjobs.yaml
+    creates: "{{ bang_config_path }}/servers/{{ inventory_hostname }}_cronjobs.yaml"
 
 - name: Generate SSH keys for BaNG
   shell: ssh-keygen -b 4096 -t rsa -f /root/.ssh/BaNG_rsa -q
@@ -33,14 +33,14 @@
 
 - name: modify default_hosts.yaml to use the BaNG_rsa key
   replace:
-    dest: /opt/BaNG/etc/defaults_hosts.yaml
+    dest: "{{ bang_config_path }}/defaults_hosts.yaml"
     regexp: '^(BKP_RSYNC_RSHELL:).*$'
     replace: '\1\t  "/usr/bin/ssh -i /root/.ssh/BaNG_rsa -o StrictHostKeyChecking=yes"'
     backup: no
 
 - name: modify default_servers.yaml, disable DB-Support
   replace:
-    dest: /opt/BaNG/etc/defaults_servers.yaml
+    dest: "{{ bang_config_path }}/defaults_servers.yaml"
     regexp: '^(db_support:)\s+1$'
     replace: '\1\t\t0'
     backup: no
