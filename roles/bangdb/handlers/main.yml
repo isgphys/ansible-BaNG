@@ -1,0 +1,8 @@
+- name: restart mysql
+  service: name=mysql state=restarted
+
+- name: create initial tables
+  mysql_db:
+    state: import
+    name: "{{ dbname }}"
+    target: "/opt/BaNG/etc/{{ dbname }}.mysql"
