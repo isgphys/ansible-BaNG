@@ -6,6 +6,8 @@ Vagrant.configure(2) do |config|
   config.vm.define 'bang-dev', primary: true do |host|
     config.vm.hostname = "bang-dev"
 
+     config.vm.network "private_network", ip: "192.168.13.100"
+
     config.vm.provider :virtualbox do |vb|
       vb.customize [ "modifyvm", :id, "--nictype1", "virtio" ]
       vb.memory = 256
