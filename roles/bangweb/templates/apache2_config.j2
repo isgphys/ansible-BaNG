@@ -2,7 +2,7 @@
     ServerName {{ inventory_hostname }}
     DocumentRoot /opt/BaNG
 
-    RedirectMatch (.*) https://{{ inventory_hostname }}$1
+    RedirectMatch (.*) https://192.168.13.100$1
 
     ErrorLog  /var/log/apache2/bang_error_log
     CustomLog /var/log/apache2/bang_access_log common

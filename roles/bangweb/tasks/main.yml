@@ -32,6 +32,10 @@
     src: apache2_config.j2
   notify: restart apache2
 
+- name: Disable default apache site config
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  notify: restart apache2
+
 - name: copy config.yml.example to config.yml
   copy:
     src: "{{ bang_path }}/config.yml.example"

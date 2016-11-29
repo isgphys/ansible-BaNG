@@ -34,6 +34,8 @@ The ansible playbooks can be re-run anytime using:
 vagrant provision --provision-with ansible
 ```
 
+You can access the BaNG web front-end by opening `http://192.168.13.100` in your browser. The default credentials are `admin` and `supersecret`.
+
 Ansible
 -------
 
