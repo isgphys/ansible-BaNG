@@ -30,3 +30,4 @@
     regexp: '^(db_support:)\s+0$'
     replace: '\1\t\t1'
     backup: no
+  when: "'bangweb' in group_names"

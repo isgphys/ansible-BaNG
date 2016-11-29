@@ -1,13 +1,13 @@
 - name: install apache2 package
   apt: pkg=apache2
 
-- name: set ServerName
-  shell: echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf
-  args:
-    creates: /etc/apache2/conf-available/servername.conf
+- name: check if servername.conf already enabled
+  stat: path=/etc/apache2/conf-enabled/servername.conf
+  register: apache2_servername_enabled
 
 - name: enable servername.conf
   command: /usr/sbin/a2enconf servername
+  when: apache2_servername_enabled == false
 
 - name: install BaNG-Web dependencies
   apt: pkg={{ item }}
@@ -25,6 +25,11 @@
     - proxy
     - proxy_http
 
+- name: set ServerName
+  shell: echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf
+  args:
+    creates: /etc/apache2/conf-available/servername.conf
+
 - name: Create apache2_config
   template:
     dest: "{{ bang_config_path }}/apache2_config.conf"
@@ -36,9 +41,14 @@
     dest: /etc/apache2/sites-available/BaNG.conf
     state: link
 
+- name: check if BaNG.conf already enabled
+  stat: path=/etc/apache2/conf-enabled/BaNG.conf
+  register: apache2_BaNG_enabled
+
 - name: active BaNG.conf on apache2
   shell: /usr/sbin/a2ensite BaNG
   notify: restart apache2
+  when: apache2_BaNG_enabled == false
 
 - name: copy config.yml.example to config.yml
   copy:

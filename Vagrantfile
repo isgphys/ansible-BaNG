@@ -25,6 +25,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.groups = {
       "bang" => [ "bang-dev" ],
+      "bangweb" => [ "bang-dev" ],
       "bangweb-vagrant" => [ "bang-dev" ],
     }
     ansible.sudo = true
