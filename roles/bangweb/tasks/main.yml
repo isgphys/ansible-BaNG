@@ -1,7 +1,6 @@
 - name: install apache2 package
   apt: pkg=apache2
 
-
 - name: set ServerName
   shell: echo 'ServerName localhost' > /etc/apache2/conf-available/servername.conf
   args:
