@@ -32,12 +32,12 @@
 
 - name: Create apache2_config
   template:
-    dest: "{{ bang_config_path }}/apache2_config.conf"
+    dest: "{{ bang_config_path }}/apache2_config"
     src: apache2_config.j2
 
 - name: Create symlink to /etc/apache2/sites-available/
   file:
-    src: "{{ bang_config_path }}/apache2_config.conf"
+    src: "{{ bang_config_path }}/apache2_config"
     dest: /etc/apache2/sites-available/BaNG.conf
     state: link
 
