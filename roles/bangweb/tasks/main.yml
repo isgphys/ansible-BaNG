@@ -28,8 +28,17 @@
 
 - name: Create apache2_config
   template:
-    dest: /etc/apache2/sites-enabled/BaNG.conf
+    dest: "{{ bang_config_path }}/apache2_config.conf"
     src: apache2_config.j2
+
+- name: Create symlink to /etc/apache2/sites-available/
+  file:
+    src: "{{ bang_config_path }}/apache2_config.conf"
+    dest: /etc/apache2/sites-available/BaNG.conf
+    state: link
+
+- name: active BaNG.conf on apache2
+  shell: /usr/sbin/a2ensite BaNG
   notify: restart apache2
 
 - name: Disable default apache site config

@@ -5,4 +5,4 @@
   mysql_db:
     state: import
     name: "{{ dbname }}"
-    target: "/opt/BaNG/etc/{{ dbname }}.mysql"
+    target: "/opt/BaNG/system/{{ dbname }}.mysql"
