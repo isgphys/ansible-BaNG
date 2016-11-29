@@ -1,4 +1,6 @@
 - hosts: bang
+  vars_files:
+    - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
   roles:
     - { role: bang,      tags: bang      }
   handlers:
@@ -6,6 +8,9 @@
       static: yes
 
 - hosts: bangweb
+  vars_files:
+    - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
+    - [ "group_vars/bangweb.yml", "group_vars/bangweb.yml.example" ]
   roles:
     - { role: bangdb,   tags: bangdb    }
     - { role: bangweb,  tags: bangweb   }
