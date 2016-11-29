@@ -1,8 +1,2 @@
-- name: touch production.log file
-  file:
-    path: "{{ bang_path }}/var/log/production.log"
-    state: touch
-    owner: www-data
-
 - name: restart BaNG-Web service
   service: name=BaNG-Web state=restarted
