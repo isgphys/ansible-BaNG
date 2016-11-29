@@ -7,13 +7,20 @@
     - include: handlers/services.yml
       static: yes
 
-- hosts: bangweb
+- hosts: bangweb:bangweb-vagrant
   vars_files:
     - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
     - [ "group_vars/bangweb.yml", "group_vars/bangweb.yml.example" ]
   roles:
     - { role: bangdb,   tags: bangdb    }
     - { role: bangweb,  tags: bangweb   }
+  handlers:
+    - include: handlers/services.yml
+      static: yes
+        
+- hosts: bangweb-vagrant
+  roles:
+    - { role: bangweb-vagrant, tags: bangweb-vagrant  }
   handlers:
     - include: handlers/services.yml
       static: yes
