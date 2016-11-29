@@ -1,5 +1,5 @@
 mysql_port: 3306
 dbhost: localhost
+dbname: bangstat
 dbuser: foouser
-dbname: foodb
-dbupasswd: abc
+dbupasswd: abc129.
