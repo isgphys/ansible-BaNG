@@ -1,5 +1,7 @@
-mysql_port: 3306
 dbhost: localhost
 dbname: bangstat
 dbuser: foouser
 dbupasswd: abc129.
+apache_servername: 192.168.13.100
+apache_ssl_crt: /etc/ssl/certs/ssl-cert-snakeoil.pem
+apache_ssl_key: /etc/ssl/private/ssl-cert-snakeoil.key
