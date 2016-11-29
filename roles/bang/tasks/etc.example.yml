@@ -1,0 +1,34 @@
+# Generate BaNG config from etc.example for testing purposes
+- name: copy etc.example to etc
+  command: "/bin/cp -r {{ bang_path }}/etc.example {{ bang_config_path }}"
+  args:
+    creates: "{{ bang_config_path }}"
+
+- name: rename server/bangserver_defaults.yaml
+  command: "/bin/mv {{ bang_config_path }}/servers/bangserver_defaults.yaml {{ bang_config_path }}/servers/{{ inventory_hostname }}_defaults.yaml"
+  args:
+    creates: "{{ bang_config_path }}/servers/{{ inventory_hostname }}_defaults.yaml"
+
+- name: rename server/bangserver_cronjobs.yaml
+  command: "/bin/mv {{ bang_config_path }}/servers/bangserver_cronjobs.yaml {{ bang_config_path }}/servers/{{ inventory_hostname }}_cronjobs.yaml"
+  args:
+    creates: "{{ bang_config_path }}/servers/{{ inventory_hostname }}_cronjobs.yaml"
+
+- name: Generate SSH keys for BaNG
+  shell: ssh-keygen -b 4096 -t rsa -f /root/.ssh/BaNG_rsa -q
+  args:
+    creates: /root/.ssh/BaNG_rsa
+
+- name: modify default_hosts.yaml to use the BaNG_rsa key
+  replace:
+    dest: "{{ bang_config_path }}/defaults_hosts.yaml"
+    regexp: '^(BKP_RSYNC_RSHELL:).*$'
+    replace: '\1\t  "/usr/bin/ssh -i /root/.ssh/BaNG_rsa -o StrictHostKeyChecking=yes"'
+    backup: no
+
+- name: modify default_servers.yaml, disable DB-Support
+  replace:
+    dest: "{{ bang_config_path }}/defaults_servers.yaml"
+    regexp: '^(db_support:)\s+1$'
+    replace: '\1\t\t0'
+    backup: no

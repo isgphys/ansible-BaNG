@@ -1,3 +1,4 @@
 bang_path: /opt/BaNG
 bang_config_path: "{{ bang_path }}/etc"
 bang_git_repo: https://github.com/patschbo/BaNG.git
+#bang_config_git_repo: https://example.com/BaNG-Config.git

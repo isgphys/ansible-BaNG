@@ -1,0 +1,7 @@
+# BaNG config for production
+- name: clone BaNG config git repository
+  git:
+    repo: "{{ bang_config_git_repo }}"
+    dest: "{{ bang_config_path }}"
+    accept_hostkey: yes
+    update: no
