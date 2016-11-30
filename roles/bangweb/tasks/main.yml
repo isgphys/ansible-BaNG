@@ -42,13 +42,13 @@
     state: link
 
 - name: check if BaNG.conf already enabled
-  stat: path=/etc/apache2/conf-enabled/BaNG.conf
-  register: apache2_BaNG_enabled
+  stat: path=/etc/apache2/sites-enabled/BaNG.conf
+  register: apache2_BaNG
 
-- name: active BaNG.conf on apache2
+- name: activate BaNG.conf on apache2
   shell: /usr/sbin/a2ensite BaNG
   notify: restart apache2
-  when: apache2_BaNG_enabled == false
+  when: apache2_BaNG.stat.islnk is not defined
 
 - name: copy config.yml.example to config.yml
   copy:
