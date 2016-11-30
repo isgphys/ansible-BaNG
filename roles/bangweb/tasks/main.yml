@@ -78,7 +78,6 @@
 - name: fix folder ownerships
   file:
     path: "{{ bang_path }}/{{ item }}"
-    mode: 0755
     owner: www-data
     state: directory
     recurse: yes
