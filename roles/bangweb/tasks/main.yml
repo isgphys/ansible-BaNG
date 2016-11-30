@@ -55,6 +55,14 @@
     src: "{{ bang_path }}/config.yml.example"
     dest: "{{ bang_path }}/config.yml"
     remote_src: true
+  when: bang_config_git_repo is not defined
+
+- name: create symlink of etc/config.yml to config.yml
+  file:
+    src: "{{ bang_config_path }}/config.yml"
+    dest: "{{ bang_path }}/config.yml"
+    state: link
+  when: bang_config_git_repo is defined
 
 - name: check for existing var/log/production.log
   stat: path="{{ bang_path }}/var/log/production.log"
@@ -78,9 +86,9 @@
     - "var/log"
     - "var/sessions"
 
-- name: Copy BaNG-Web.service to /etc/systemd/system/
-  copy:
+- name: link BaNG-Web.service to /etc/systemd/system/
+  file:
     src: "{{ bang_path }}/system/BaNG-Web.service"
-    dest: /etc/systemd/system/
-    remote_src: true
+    dest: /etc/systemd/system/BaNG-Web.service
+    state: link
   notify: restart BaNG-Web service
