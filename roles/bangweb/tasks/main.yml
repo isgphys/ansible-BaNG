@@ -1,3 +1,9 @@
+- name: ensure presence of letsencrypt certificate in production
+  stat: path=/opt/letsencrypt/{{ ansible_hostname }}.crt
+  register: letsencrypt_crt
+- fail: msg="Letsencrypt certificate is missing on the remote host. Please generate it first."
+  when: letsencrypt_crt.stat.exists == False and apache_ssl_crt.find('letsencrypt') != -1
+
 - name: install apache2 package
   apt: pkg=apache2
 
