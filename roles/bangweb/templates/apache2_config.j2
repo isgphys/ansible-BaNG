@@ -1,14 +1,26 @@
+#jinja2: lstrip_blocks: "true"
 <VirtualHost *:80>
     ServerName {{ apache_servername }}
-    DocumentRoot /opt/BaNG
+    {% if apache_serveralias is defined %}
+        {% for alias in apache_serveralias %}
+    ServerAlias {{ alias }}
+        {% endfor %}
+    {% endif %}
 
     RedirectMatch (.*) https://{{ apache_servername }}$1
 
     ErrorLog  /var/log/apache2/bang_error_log
     CustomLog /var/log/apache2/bang_access_log common
 </VirtualHost>
+
 <VirtualHost *:443>
     ServerName {{ apache_servername }}
+    {% if apache_serveralias is defined %}
+        {% for alias in apache_serveralias %}
+    ServerAlias {{ alias }}
+        {% endfor %}
+    {% endif %}
+
     DocumentRoot /opt/BaNG
 
     HostnameLookups On
