@@ -50,3 +50,9 @@ The changes can be pushed to production with:
 ```sh
 ansible-playbook site.yml
 ```
+
+Push the changes only to one specific server:
+
+```sh
+ansible-playbook site.yml --limit servername
+```
