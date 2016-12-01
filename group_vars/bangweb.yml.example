@@ -1,5 +1,6 @@
 bang_db_support: 1
 #
 apache_servername: 192.168.13.100
+apache_serveralias:
 apache_ssl_crt: /etc/ssl/certs/ssl-cert-snakeoil.pem
 apache_ssl_key: /etc/ssl/private/ssl-cert-snakeoil.key
