@@ -1,33 +1,5 @@
-- name: Install Mysql packages
-  apt: name={{ item }} state=installed
-  with_items:
-    - mysql-server
-    - python-mysqldb
-  notify: restart mysql
-
-- name: Create BaNG Database
-  mysql_db:
-    name: "{{ dbname }}"
-    state: present
-  notify: create initial tables
-
-- name: Create BaNG DB User
-  mysql_user:
-    name: "{{ dbuser }}"
-    password: "{{ dbupasswd }}"
-    priv: "{{ dbname }}.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES"
-    host: "{{ dbhost }}"
-    state: present
-
-- name: Create bangstat_db.yaml
-  template:
-    dest: "{{ bang_config_path }}/bangstat_db.yaml"
-    src: bangstat_db.yaml.j2
-
-- name: modify default_servers.yaml, enable DB-Support
-  replace:
-    dest: "{{ bang_config_path }}/defaults_servers.yaml"
-    regexp: '^(db_support:)\s+0$'
-    replace: '\1\t\t1'
-    backup: no
+- include: bangstat_db.yml
   when: "'bangweb' in group_names"
+
+- include: bangstat_config.yml
+  when: "'bangweb' in group_names or bang_db_support == 1"

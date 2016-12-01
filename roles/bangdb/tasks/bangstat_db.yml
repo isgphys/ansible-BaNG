@@ -1,0 +1,20 @@
+- name: Install Mysql packages
+  apt: name={{ item }} state=installed
+  with_items:
+    - mysql-server
+    - python-mysqldb
+  notify: restart mysql
+
+- name: Create BaNG Database
+  mysql_db:
+    name: "{{ dbname }}"
+    state: present
+  notify: create initial tables
+
+- name: Create BaNG DB User
+  mysql_user:
+    name: "{{ dbuser }}"
+    password: "{{ dbupasswd }}"
+    priv: "{{ dbname }}.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES"
+    host: "{{ dbhost }}"
+    state: present

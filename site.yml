@@ -1,8 +1,10 @@
 - hosts: bang
   vars_files:
     - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
+    - "host_vars/{{ inventory_hostname}}.yml"
   roles:
-    - { role: bang,      tags: bang      }
+    - { role: bang,     tags: bang      }
+    - { role: bangdb,   tags: bangdb    }
   handlers:
     - include: handlers/services.yml
       static: yes

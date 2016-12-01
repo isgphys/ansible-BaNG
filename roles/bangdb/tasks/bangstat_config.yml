@@ -1,0 +1,11 @@
+- name: Create bangstat_db.yaml
+  template:
+    dest: "{{ bang_config_path }}/bangstat_db.yaml"
+    src: bangstat_db.yaml.j2
+
+- name: modify default_servers.yaml, enable DB-Support
+  replace:
+    dest: "{{ bang_config_path }}/defaults_servers.yaml"
+    regexp: '^(db_support:)\s+0$'
+    replace: '\1\t\t1'
+    backup: no
