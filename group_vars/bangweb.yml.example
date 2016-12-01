@@ -1,7 +1,4 @@
-dbhost: localhost
-dbname: bangstat
-dbuser: foouser
-dbupasswd: abc129.
+bang_db_support: 1
 #
 apache_servername: 192.168.13.100
 apache_ssl_crt: /etc/ssl/certs/ssl-cert-snakeoil.pem

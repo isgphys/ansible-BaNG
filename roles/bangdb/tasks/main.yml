@@ -1,5 +1,5 @@
 - include: bangstat_db.yml
-  when: "'bangweb' in group_names"
+  when: "'bangdb' in group_names"
 
 - include: bangstat_config.yml
-  when: "'bangweb' in group_names or bang_db_support == 1"
+  when: "'bangdb' in group_names or bang_db_support == 1"

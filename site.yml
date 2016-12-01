@@ -1,6 +1,7 @@
 - hosts: bang
   vars_files:
     - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
+    - [ "group_vars/bangdb.yml", "group_vars/bangdb.yml.example" ]
     - "host_vars/{{ inventory_hostname}}.yml"
   roles:
     - { role: bang,     tags: bang      }
@@ -15,8 +16,18 @@
     - [ "group_vars/bangweb.yml", "group_vars/bangweb.yml.example" ]
     - "host_vars/{{ inventory_hostname}}.yml"
   roles:
-    - { role: bangdb,   tags: bangdb    }
     - { role: bangweb,  tags: bangweb   }
+  handlers:
+    - include: handlers/services.yml
+      static: yes
+
+- hosts: bangdb
+  vars_files:
+    - [ "group_vars/all.yml", "group_vars/all.yml.example" ]
+    - [ "group_vars/bangdb.yml", "group_vars/bangdb.yml.example" ]
+    - "host_vars/{{ inventory_hostname}}.yml"
+  roles:
+    - { role: bangdb,   tags: bangdb    }
   handlers:
     - include: handlers/services.yml
       static: yes

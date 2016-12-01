@@ -1,5 +1,3 @@
-bang_db_support: 1
-#
 dbhost: localhost
 dbname: bangstat
 dbuser: foouser
