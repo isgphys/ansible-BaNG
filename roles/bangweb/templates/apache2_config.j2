@@ -1,4 +1,8 @@
 #jinja2: lstrip_blocks: "true"
+# apache2_conf -- Managed by Ansible, please don't edit manually
+#
+# {{ ansible_managed }}
+
 <VirtualHost *:80>
     ServerName {{ apache_servername }}
     {% if apache_serveralias is defined %}
