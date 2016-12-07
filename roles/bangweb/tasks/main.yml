@@ -92,8 +92,9 @@
     - "var/sessions"
 
 - name: link BaNG-Web.service to /etc/systemd/system/
-  file:
+  copy:
     src: "{{ bang_path }}/system/BaNG-Web.service"
     dest: /etc/systemd/system/BaNG-Web.service
-    state: link
-  notify: restart BaNG-Web service
+    mode: 0644
+    remote_src: true
+  notify: enable BaNG-Web service

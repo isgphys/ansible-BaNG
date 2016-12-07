@@ -1,2 +1,5 @@
-- name: restart BaNG-Web service
-  service: name=BaNG-Web state=restarted
+- name: enable BaNG-Web service
+  systemd:
+    name: BaNG-Web
+    enabled: yes
+    state: started
