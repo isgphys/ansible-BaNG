@@ -3,6 +3,8 @@ ansible-bang
 
 [Ansible](https://www.ansible.com) playbooks to install and configure [BaNG](https://github.com/patschbo/BaNG).
 
+Currently supported operating systems: Ubuntu (Xenial, Trusty)
+
 Groups
 ------
 
