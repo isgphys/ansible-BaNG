@@ -9,8 +9,8 @@ Groups
 ------
 
   * bang: BaNG backup servers
-  * bangweb: BaNG web frontend and database server
-  * bangclient: BaNG backup clients
+  * bangweb: BaNG web frontend
+  * bangdb: BaNG database server
 
 Configuration
 -------------
