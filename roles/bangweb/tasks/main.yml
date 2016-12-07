@@ -97,4 +97,13 @@
     dest: /etc/systemd/system/BaNG-Web.service
     mode: 0644
     remote_src: true
-  notify: enable BaNG-Web service
+  notify: enable systemd BaNG-Web service
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+
+- name: symlink BaNG-Web to /etc/init.d/
+  copy:
+    src: "{{ bang_path }}/system/BaNG-Web.init-d"
+    dest: /etc/init.d/BaNG-Web
+    remote_src: true
+  notify: enable init.d BaNG-Web service
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'

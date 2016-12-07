@@ -1,5 +1,10 @@
-- name: enable BaNG-Web service
+- name: enable systemd BaNG-Web service
   systemd:
     name: BaNG-Web
     enabled: yes
+    state: started
+
+- name: enable init.d BaNG-Web service
+  service:
+    name: BaNG-Web
     state: started
