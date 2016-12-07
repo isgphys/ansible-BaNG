@@ -4,6 +4,7 @@
     - [ "group_vars/bangdb.yml", "group_vars/bangdb.yml.example" ]
     - "host_vars/{{ inventory_hostname}}.yml"
   roles:
+    - { role: debug,    tags: debug     }
     - { role: bang,     tags: bang      }
     - { role: bangdb,   tags: bangdb    }
   handlers:

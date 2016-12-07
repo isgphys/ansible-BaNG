@@ -1,0 +1,5 @@
+- name: show distribution variables
+  debug:
+    msg: "Distribution: {{ ansible_distribution }}
+          Release: {{ ansible_distribution_release }}
+          Version: {{ ansible_distribution_version }}"
