@@ -1,7 +1,7 @@
 - name: Install Mysql packages
   apt: name={{ item }} state=installed
   with_items:
-    - mysql-server
+    - mariadb-server
     - python-mysqldb
   notify: restart mysql
 
