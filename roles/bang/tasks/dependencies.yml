@@ -1,6 +1,7 @@
 - name: install BaNG dependencies
   apt: pkg={{ item }}
   with_items:
+    - coreutils
     - rsync
     - perl
     - libclone-perl
