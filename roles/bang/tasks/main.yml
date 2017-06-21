@@ -2,6 +2,7 @@
   apt: update_cache=yes cache_valid_time=3600
 
 - include: tools.yml
+
 - include: dependencies.yml
 
 - name: clone BaNG git repository
@@ -11,7 +12,12 @@
     accept_hostkey: yes
     update: no
 
-- include: etc.yml
+- name: get BaNG config
+  include: etc.yml
+  static: no
   when: bang_config_git_repo is defined
-- include: etc.example.yml
+
+- name: get BaNG example config
+  include: etc.example.yml
+  static: no
   when: bang_config_git_repo is not defined

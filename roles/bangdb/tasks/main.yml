@@ -1,5 +1,9 @@
-- include: bangstat_db.yml
+- name: setup BaNG database
+  include: bangstat_db.yml
+  static: no
   when: "'bangdb' in group_names"
 
-- include: bangstat_config.yml
+- name: get bangstat config
+  include: bangstat_config.yml
+  static: no
   when: "'bangdb' in group_names or bang_db_support == 1"
