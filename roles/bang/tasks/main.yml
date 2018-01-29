@@ -1,9 +1,9 @@
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=3600
 
-- include: tools.yml
+- import_tasks: tools.yml
 
-- include: dependencies.yml
+- import_tasks: dependencies.yml
 
 - name: clone BaNG git repository
   git:
@@ -13,13 +13,11 @@
     update: no
 
 - name: get BaNG config
-  include: etc.yml
-  static: no
+  include_tasks: etc.yml
   when: bang_config_git_repo is defined
 
 - name: get BaNG example config
-  include: etc.example.yml
-  static: no
+  include_tasks: etc.example.yml
   when: bang_config_git_repo is not defined
 
 - name: check if BaNG cron file exists

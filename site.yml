@@ -8,8 +8,7 @@
     - { role: bang,     tags: bang      }
     - { role: bangdb,   tags: bangdb    }
   handlers:
-    - include: handlers/services.yml
-      static: yes
+    - import_tasks: handlers/services.yml
 
 - hosts: bangweb:bangweb-vagrant
   vars_files:
@@ -19,8 +18,7 @@
   roles:
     - { role: bangweb,  tags: bangweb   }
   handlers:
-    - include: handlers/services.yml
-      static: yes
+    - import_tasks: handlers/services.yml
 
 - hosts: bangdb
   vars_files:
@@ -30,12 +28,10 @@
   roles:
     - { role: bangdb,   tags: bangdb    }
   handlers:
-    - include: handlers/services.yml
-      static: yes
+    - import_tasks: handlers/services.yml
 
 - hosts: bangweb-vagrant
   roles:
     - { role: bangweb-vagrant, tags: bangweb-vagrant  }
   handlers:
-    - include: handlers/services.yml
-      static: yes
+    - import_tasks: handlers/services.yml

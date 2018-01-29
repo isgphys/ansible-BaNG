@@ -1,9 +1,7 @@
 - name: setup BaNG database
-  include: bangstat_db.yml
-  static: no
+  include_tasks: bangstat_db.yml
   when: "'bangdb' in group_names"
 
 - name: get bangstat config
-  include: bangstat_config.yml
-  static: no
+  include_tasks: bangstat_config.yml
   when: "'bangdb' in group_names or bang_db_support == 1"
