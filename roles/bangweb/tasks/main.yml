@@ -90,14 +90,33 @@
   with_items:
     - "var/log"
     - "var/sessions"
+    - "var/trigger"
 
-- name: link BaNG-Web.service to /etc/systemd/system/
+- name: copy BaNG-Web.service to /etc/systemd/system/
   copy:
     src: "{{ bang_path }}/system/BaNG-Web.service"
     dest: /etc/systemd/system/BaNG-Web.service
     mode: 0644
     remote_src: true
-  notify: enable systemd BaNG-Web service
+  notify: enable systemd BaNG-Web.service
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+
+- name: copy BaNG-Trigger.service to /etc/systemd/system/
+  copy:
+    src: "{{ bang_path }}/system/BaNG-Trigger.service"
+    dest: /etc/systemd/system/BaNG-Trigger.service
+    mode: 0644
+    remote_src: true
+  notify: enable systemd BaNG-Trigger.service
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+
+- name: copy BaNG-Trigger.path to /etc/systemd/system/
+  copy:
+    src: "{{ bang_path }}/system/BaNG-Trigger.path"
+    dest: /etc/systemd/system/BaNG-Trigger.path
+    mode: 0644
+    remote_src: true
+  notify: enable systemd BaNG-Trigger.path
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
 - name: symlink BaNG-Web to /etc/init.d/

@@ -11,7 +11,7 @@
         {% endfor %}
     {% endif %}
 
-    RedirectMatch (.*) https://{{ apache_servername }}$1
+    Use RedirectTo https backup.phys.ethz.ch
 
     ErrorLog  /var/log/apache2/bang_error_log
     CustomLog /var/log/apache2/bang_access_log common

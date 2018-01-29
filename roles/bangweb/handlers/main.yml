@@ -1,6 +1,18 @@
-- name: enable systemd BaNG-Web service
+- name: enable systemd BaNG-Web.service
   systemd:
     name: BaNG-Web
+    enabled: yes
+    state: started
+
+- name: enable systemd BaNG-Trigger.service
+  systemd:
+    name: BaNG-Trigger
+    enabled: yes
+    state: started
+
+- name: enable systemd BaNG-Trigger.path
+  systemd:
+    name: BaNG-Trigger.path
     enabled: yes
     state: started
 
