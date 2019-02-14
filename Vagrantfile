@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
       "bangweb-vagrant" => [ "bang-dev" ],
     }
     ansible.sudo = true
-    ansible.playbook = "./site.yml"
+    ansible.playbook = "./playbook-BaNG.yml"
 #    ansible.verbose = "vvv"
   end
 end
