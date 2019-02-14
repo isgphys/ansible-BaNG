@@ -5,7 +5,7 @@
   when: letsencrypt_crt.stat.exists == False and apache_ssl_crt.find('letsencrypt') != -1
 
 - name: install apache2 package
-  apt: pkg=apache2
+  package: pkg=apache2
 
 - name: check if servername.conf already enabled
   stat: path=/etc/apache2/conf-enabled/servername.conf
@@ -16,8 +16,8 @@
   when: apache2_servername_enabled == false
 
 - name: install BaNG-Web dependencies
-  apt: pkg={{ item }}
-  with_items:
+  package: 
+    pkg:
     - starman
     - libdancer-perl
     - libdancer-plugin-auth-extensible-perl
