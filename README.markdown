@@ -44,17 +44,17 @@ Ansible
 Use the dry-run mode to see what changes would be made on the machines defined in the `hosts` file.
 
 ```sh
-ansible-playbook -C -D site.yml
+ansible-playbook -C -D playbook-BaNG.yml
 ```
 
 The changes can be pushed to production with:
 
 ```sh
-ansible-playbook site.yml
+ansible-playbook playbook-BaNG.yml
 ```
 
 Push the changes only to one specific server:
 
 ```sh
-ansible-playbook site.yml --limit servername
+ansible-playbook playbook-BaNG.yml --limit servername
 ```
