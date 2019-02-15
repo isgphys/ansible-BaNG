@@ -1,8 +1,8 @@
-- name: Install Mysql packages
-  apt: name={{ item }} state=installed
-  with_items:
-    - mariadb-server
-    - python-mysqldb
+- name: Install MariaDB packages
+  package:
+    pkg:
+      - mariadb-server
+      - python-mysqldb
   notify: restart mysql
 
 - name: Create BaNG Database
