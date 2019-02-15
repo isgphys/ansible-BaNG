@@ -3,7 +3,7 @@ ansible-bang
 
 [Ansible](https://www.ansible.com) playbooks to install and configure [BaNG](https://github.com/patschbo/BaNG).
 
-Currently supported operating systems: Ubuntu (Xenial, Trusty)
+Currently supported operating systems: Ubuntu (Bionic, Xenial)
 
 Groups
 ------
@@ -53,8 +53,8 @@ The changes can be pushed to production with:
 ansible-playbook playbook-BaNG.yml
 ```
 
-Push the changes only to one specific server:
+Push the changes only to one specific host:
 
 ```sh
-ansible-playbook playbook-BaNG.yml --limit servername
+ansible-playbook playbook-BaNG.yml --limit hostname
 ```
