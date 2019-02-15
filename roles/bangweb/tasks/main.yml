@@ -116,7 +116,7 @@
       mode: 0644
       remote_src: true
     notify: enable systemd BaNG-Trigger.path
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version >= '18'
 
 - name: symlink BaNG-Web to /etc/init.d/
   copy:
@@ -124,4 +124,4 @@
     dest: /etc/init.d/BaNG-Web
     remote_src: true
   notify: enable init.d BaNG-Web service
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version < '18'
