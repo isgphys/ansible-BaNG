@@ -22,15 +22,16 @@
 
 - name: check if BaNG cron file exists
   stat: path=/etc/cron.d/BaNG
-  register: bangcron_stat
+  register: bangcron
   check_mode: no
 
 - name: check if BaNG cron file up-to-date
   command: /opt/BaNG/BaNGadm --cron-check
-  register: bangadm_result
-  when: bangcron_stat.stat.exists
+  changed_when: bangadm.stdout != ""
+  register: bangadm
+  when: bangcron.stat.exists
   check_mode: no
 
 - name: create/update BaNG cron file
   shell: /opt/BaNG/BaNGadm --cron-create
-  when: bangcron_stat.stat.exists == false or bangadm_result.stdout != ""
+  when: bangcron.stat.exists == false or bangadm.changed
