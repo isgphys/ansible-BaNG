@@ -1,8 +1,6 @@
 - name: update apt cache
   apt: update_cache=yes cache_valid_time=3600
 
-- import_tasks: tools.yml
-
 - import_tasks: dependencies.yml
 
 - name: clone BaNG git repository

@@ -1,2 +1,0 @@
-- name : install git
-  package: pkg=git

@@ -1,6 +1,7 @@
 - name: install BaNG dependencies
   package:
     pkg:
+        - git
         - coreutils
         - rsync
         - perl
