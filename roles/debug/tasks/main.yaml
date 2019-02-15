@@ -3,4 +3,5 @@
     msg: "OS-Family: {{ ansible_os_family }}
           Distribution: {{ ansible_distribution }}
           Release: {{ ansible_distribution_release }}
-          Version: {{ ansible_distribution_version }}"
+          Version: {{ ansible_distribution_version }}
+          Major_Version: {{ ansible_distribution_major_version }}"
