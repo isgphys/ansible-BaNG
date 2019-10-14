@@ -1,7 +1,7 @@
 ansible-bang
 ============
 
-[Ansible](https://www.ansible.com) playbooks to install and configure [BaNG](https://github.com/patschbo/BaNG).
+[Ansible](https://www.ansible.com) playbooks to install and configure [BaNG](https://github.com/isgphys/BaNG).
 
 Currently supported operating systems: Ubuntu (Bionic, Xenial)
 
